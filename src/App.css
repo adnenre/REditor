@@ -1,7 +1,18 @@
-.App {
-  text-align: center;
+*{
+  box-sizing: border-box;
 }
-
+body{
+  
+  background:white;
+}
+.App {
+  
+  display:flex;
+  height:100vh;
+}
+.editor_container {
+  margin:auto;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
