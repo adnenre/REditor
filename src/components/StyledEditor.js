@@ -16,8 +16,19 @@ export const StyledToolbar = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+export const StyledToolbarTooltips = styled.p`
+  
+  background:#000;
+  color:white;
+  padding:5px;
+  border-radius:5px;
+  position:absolute;
+  top:100%;
+  
+`;
 export const StyledToolbarIconContainer = styled.div`
   display: flex;
+ 
 `;
 
 export const StyledEditorContainer = styled.div`
@@ -44,6 +55,7 @@ export const StyledFooter = styled.div`
   justify-content: flex-end;
 `;
 export const StyledToolbarIcon = styled.button`
+  position:relative;
   background: white;
   width: 38px;
   height: 40px;
@@ -62,6 +74,12 @@ export const StyledToolbarIcon = styled.button`
   &:hover {
     background: #f1f1f1;
   }
+  > p{
+    display:none;
+  }
+  :hover > p{
+   display:block;
+  }
 `;
 
 export const SEditor = {
@@ -70,7 +88,7 @@ export const SEditor = {
 
   IconContainer: StyledToolbarIconContainer,
   Icon: StyledToolbarIcon,
-
+  IconTooltips:StyledToolbarTooltips,
   Body: StyledEditorContainer,
   Footer: StyledFooter,
 };

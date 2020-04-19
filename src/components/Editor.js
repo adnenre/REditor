@@ -1,36 +1,44 @@
 import React /*, { useState }*/ from "react";
-import {
-  SEditor
-
-} from "./StyledEditor";
+import { SEditor } from "./StyledEditor";
 import ContentEditable from "react-contenteditable";
 import { EditorConfig } from "./EditorConfigs";
 import useFullScreen from "../hooks/useFullScreen";
 import J_ from "../utils";
 
-const ToolbarIcon = (props) => (
-  <SEditor.Icon {...props}>
-    <i className="material-icons" onClick={(e) => e.preventDefault()}>
-      {props.name}
-    </i>
-  </SEditor.Icon>
-);
+const ToolbarIcon = ({name,toolTips,...restProps}) => {
+  
+  return (
+    <SEditor.Icon    {...restProps}>
+      <i
+        className="material-icons"
+        onClick={(e) => e.preventDefault()}
+      >
+        {name}
+      </i>
+      
+        <SEditor.IconTooltips >
+          {toolTips}
+        </SEditor.IconTooltips>
+      
+    </SEditor.Icon>
+  );
+};
 
 const EditorToolbar = ({
   onClick,
   configs: { formatTools, toolBarLeft },
-  restProps,
+  ...restProps
 }) => {
   return (
     <SEditor.Toolbar {...restProps}>
       <SEditor.IconContainer>
-        {formatTools.map(({ name, icon }) => (
-          <ToolbarIcon onClick={onClick} data-value={name} name={icon} />
+        {formatTools.map(({ id, name, icon }) => (
+          <ToolbarIcon key={id} onClick={onClick} data-value={name} name={icon} toolTips={name}/>
         ))}
       </SEditor.IconContainer>
       <SEditor.IconContainer>
-        {toolBarLeft.map(({ name, icon }) => (
-          <ToolbarIcon onClick={onClick} data-value={name} name={icon} />
+        {toolBarLeft.map(({ id, name, icon }) => (
+          <ToolbarIcon key={id} onClick={onClick} data-value={name} name={icon} toolTips={name}/>
         ))}
       </SEditor.IconContainer>
     </SEditor.Toolbar>
@@ -70,6 +78,7 @@ const SLEditor = (props) => {
   const handleChange = (event) => setContent(event.target.value);
   // toolbar action
   const handleAction = (e) => {
+    console.log('clicked')
     let action = e.currentTarget.dataset.value;
     if (action === "fullscreen") {
       onToggleFullScreen();
